@@ -1,8 +1,10 @@
-# scaler
-// TODO(user): Add simple overview of use/purpose
+# scaler Operator
+A Kubernetes Operator built with Golang to automatically scale applications at a predefined time. This operator simplifies resource management by adjusting application replicas according to a scheduled time, ensuring efficient use of resources.
+
 
 ## Description
-// TODO(user): An in-depth paragraph about your project and overview of use
+The Scaler Operator is designed to automate scaling for Kubernetes applications based on time schedules. It allows users to define custom scaling strategies tailored to workload patterns, ensuring that applications are scaled up or down as needed during specific times of the day. This eliminates manual scaling efforts and ensures resource optimization for both performance and cost efficiency.
+
 
 ## Getting Started
 
@@ -90,7 +92,8 @@ kubectl apply -f https://raw.githubusercontent.com/<org>/scaler/<tag or branch>/
 ```
 
 ## Contributing
-// TODO(user): Add detailed information on how you would like others to contribute to this project
+We welcome contributions to the Scaler Operator. Please follow the steps outlined in the contributing guidelines.
+
 
 **NOTE:** Run `make help` for more information on all potential `make` targets
 
