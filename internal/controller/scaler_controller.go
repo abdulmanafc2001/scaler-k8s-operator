@@ -22,7 +22,6 @@ import (
 
 	v1 "k8s.io/api/apps/v1"
 
-	apiv1 "github.com/abdulmanafc2001/scaler/api/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -56,7 +55,7 @@ func (r *ScalerReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctr
 
 	currentHour := time.Now().UTC().Hour()
 	l.Info("current time: ", "hour", currentHour)
-	scaler := &apiv1.Scaler{}
+	scaler := &scalerv1.Scaler{}
 	err := r.Get(ctx, req.NamespacedName, scaler)
 	if err != nil {
 		return ctrl.Result{}, err
