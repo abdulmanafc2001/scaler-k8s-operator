@@ -7,7 +7,7 @@ metadata:
   name: scaler-sample
 spec:
   start: 5
-  end: 10
+  end: 9
   replicas: 5
   deployments:
   - name: nginx

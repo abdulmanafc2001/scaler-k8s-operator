@@ -76,9 +76,35 @@ func (r *ScalerReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctr
 				deployment.Spec.Replicas = &replicas
 				err := r.Update(ctx, deployment)
 				if err != nil {
+					scaler.Status.State = scalerv1.FAIL
 					return ctrl.Result{}, err
 				}
 			}
+			scaler.Status.State = scalerv1.SUCCESS
+			err = r.Status().Update(ctx, scaler)
+			if err != nil {
+				return ctrl.Result{}, err
+			}
+		}
+	} else {
+		for _, deploy := range scaler.Spec.Deployments {
+			deployment := &v1.Deployment{}
+			err := r.Get(ctx, types.NamespacedName{Namespace: deploy.NameSpace, Name: deploy.Name}, deployment)
+			if err != nil {
+				return ctrl.Result{}, err
+			}
+			var replica int32 = 1
+			deployment.Spec.Replicas = &replica
+			err = r.Update(ctx, deployment)
+			if err != nil {
+				scaler.Status.State = scalerv1.FAIL
+				return ctrl.Result{}, err
+			}
+		}
+		scaler.Status.State = scalerv1.SUCCESS
+		err = r.Status().Update(ctx, scaler)
+		if err != nil {
+			return ctrl.Result{}, err
 		}
 	}
 	return ctrl.Result{RequeueAfter: time.Second * 30}, nil

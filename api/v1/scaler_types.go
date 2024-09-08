@@ -38,10 +38,16 @@ type DeploymentSpec struct {
 	NameSpace string `json:"namespace"`
 }
 
+const (
+	SUCCESS = "Success"
+	FAIL    = "Failed"
+)
+
 // ScalerStatus defines the observed state of Scaler
 type ScalerStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+	State string `json:"state"`
 }
 
 // +kubebuilder:object:root=true
